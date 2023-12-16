@@ -3,7 +3,7 @@ databases:
   databaseName: temporal
   user: temporal
   plan: Starter
-  region: oregon
+  region: ohio
 
 envVarGroups:
   - name: temporal-shared
@@ -24,7 +24,7 @@ services:
   name: temporal-elasticsearch
   autoDeploy: false
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/elasticsearch/Dockerfile
   disk:
@@ -54,7 +54,7 @@ services:
   name: temporal-frontend
   autoDeploy: false
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/server/auto-setup/Dockerfile
   scaling:
@@ -104,7 +104,7 @@ services:
   name: temporal-history
   autoDeploy: false
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/server/Dockerfile
   scaling:
@@ -151,7 +151,7 @@ services:
   name: temporal-matching
   autoDeploy: false
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/server/Dockerfile
   scaling:
@@ -198,7 +198,7 @@ services:
   autoDeploy: false
   name: temporal-worker
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/server/Dockerfile
   scaling:
@@ -252,7 +252,7 @@ services:
   name: temporal-ui
   autoDeploy: false
   plan: Starter
-  region: oregon
+  region: ohio
   env: docker
   dockerfilePath: ./temporal-cluster/web/Dockerfile
   envVars:
@@ -284,33 +284,4 @@ services:
 #       property: host
 #   - key: AUTH_TOKEN
 #     sync: false
-- type: web
-  repo: https://github.com/render-examples/sample-temporal-app
-  name: app-workflow-trigger
-  plan: Starter
-  region: oregon
-  env: go
-  buildCommand: go build start/main.go
-  startCommand: ./main
-  autoDeploy: false
-  envVars:
-  - key: TEMPORAL_CLUSTER_HOST
-    fromService:
-      name: temporal-frontend
-      type: pserv
-      property: host
-- type: worker
-  repo: https://github.com/render-examples/sample-temporal-app
-  name: app-worker
-  plan: Starter
-  region: oregon
-  env: go
-  buildCommand: go build worker/main.go
-  startCommand: ./main
-  autoDeploy: false
-  envVars:
-  - key: TEMPORAL_CLUSTER_HOST
-    fromService:
-      name: temporal-frontend
-      type: pserv
-      property: host
+
